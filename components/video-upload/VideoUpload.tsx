@@ -3,8 +3,11 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-
+import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hook";
+import { clearCurrentVideo, setCurrentVideo } from "@/lib/redux/slices/videoSlice";
 const VideoUpload = () => {
+  const dispatch = useAppDispatch();
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoURL, setVideoURL] = useState<string | null>(null);
   const [progress, setProgress] = useState<number>(0);
@@ -28,13 +31,15 @@ const VideoUpload = () => {
         }
         setProgress(prog);
       }, 300);
+      dispatch(setCurrentVideo({ file, url: URL.createObjectURL(file) }));
     }
-  }, []);
+  }, [dispatch]);
 
   const removeVideo = () => {
     setVideoFile(null);
     setVideoURL(null);
     setProgress(0);
+    dispatch(clearCurrentVideo());
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -93,6 +98,11 @@ const VideoUpload = () => {
               </div>
               <Button variant="outline" size="sm" onClick={removeVideo} className="ml-2">
                 Remove
+              </Button>
+            </div>
+            <div className="flex justify-end mt-4">
+              <Button className="bg-blue-500 hover:bg-blue-600" asChild>
+                <Link href="/edit">Go to Edit</Link>
               </Button>
             </div>
           </div>

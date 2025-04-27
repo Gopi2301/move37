@@ -4,7 +4,8 @@ const initialState = {
 
     videos: [] as Video[],
     loading: false,
-    error:  null as string | null // Update the type of error to string | null
+    error:  null as string | null, // Update the type of error to string | null
+    currentVideo: null as {file: File; url:string} | null
 }
 interface Video {
     id: number,
@@ -25,8 +26,14 @@ const videoSlice = createSlice({
         fetchVideosFailure(state, action: PayloadAction<string>) {
             state.loading = false;
             state.error = action.payload;
+        },
+        setCurrentVideo(state, action:PayloadAction <{file: File; url:string} | null>) {
+            state.currentVideo = action.payload;
+        },
+        clearCurrentVideo(state) {
+            state.currentVideo = null;
         }
     }
 });
-export const { fetchVideosStart, fetchVideosSuccess, fetchVideosFailure } = videoSlice.actions;
+export const { fetchVideosStart, fetchVideosSuccess, fetchVideosFailure, setCurrentVideo, clearCurrentVideo } = videoSlice.actions;
 export const videoReducer = videoSlice.reducer;
