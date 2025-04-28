@@ -102,7 +102,7 @@ const VideoUpload = () => {
             </div>
             <div className="flex justify-end mt-4">
               <Button className="bg-blue-500 hover:bg-blue-600" asChild>
-                <Link href="/edit">Go to Edit</Link>
+                <Link href="/editor">Go to Edit</Link>
               </Button>
             </div>
           </div>

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { videoReducer } from './slices/videoSlice'
+import { timelineReducer } from './slices/timelineSlice'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      videos: videoReducer
+      videos: videoReducer,
+      timeline: timelineReducer,
     },
   })
 }
