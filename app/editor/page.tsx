@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/Button";
 import VideoPreview from "@/components/preview/VideoPreview";
 import ImageOverlay from "@/components/image-overlay/ImageOverlay";
@@ -5,9 +6,12 @@ import SubtitleManager from "@/components/subtitles/SubtitleManager";
 import AudioManager from "@/components/audio/AudioManager";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Timeline from "@/components/timeline/Timeline";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function EditorPage() {
   return (
+<DndProvider backend={HTML5Backend}>
    <div className="flex flex-col min-h-screen bg-background">
     <header className="px-8 py-4 flex justify-between ">
       <h1 className="h1">Video Editor</h1>
@@ -57,11 +61,12 @@ export default function EditorPage() {
             <h2 className="font-semibold mb-2">Preview</h2>
             <VideoPreview />
             <div className="flex justify-end mt-4">
-              <Button variant="default" loading={false}>Render</Button>
+              <Button variant="default" loading="false">Render</Button>
             </div>
           </div>
         </aside>
     </main>
    </div>
+</DndProvider>
   );
 }
