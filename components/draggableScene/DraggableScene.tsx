@@ -14,7 +14,7 @@ const DraggableScene = ({scene, index, moveScene, handleRemoveScene}: SceneItemP
     const ref = useRef<HTMLDivElement>(null);
     const[, drop] = useDrop({
     accept:'SCENE',
-    hover(item:{index:number}, monitor){
+    hover(item:{index:number}){
         if(!ref.current) return;
         const dragIndex = item.index;
         const hoverIndex = index;

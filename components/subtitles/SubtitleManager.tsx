@@ -21,9 +21,20 @@ interface SubtitleManagerProps {
   onChange?: (subtitles: SubtitleBlock[]) => void;
 }
 
+interface InputState {
+  text: string;
+  start: number;
+  end: number;
+  font: string;
+  color: string;
+  size: number;
+  position: { x: number; y: number };
+  draggingIdx: number | null;
+}
+
 const SubtitleManager = ({ onChange }: SubtitleManagerProps) => {
   const [subtitles, setSubtitles] = useState<SubtitleBlock[]>([]);
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<InputState>({
     text: "",
     start: 0,
     end: 2,
@@ -31,6 +42,7 @@ const SubtitleManager = ({ onChange }: SubtitleManagerProps) => {
     color: defaultColor,
     size: defaultSize,
     position: defaultPosition,
+    draggingIdx: null,
   });
 
   // Add subtitle block
@@ -44,7 +56,7 @@ const SubtitleManager = ({ onChange }: SubtitleManagerProps) => {
       },
     ];
     setSubtitles(newSubtitles);
-    setInput({ ...input, text: "" });
+    setInput({ ...input, text: "", draggingIdx: null });
     if (onChange) onChange(newSubtitles);
   };
 
@@ -80,9 +92,9 @@ const SubtitleManager = ({ onChange }: SubtitleManagerProps) => {
 
   // Drag-and-drop for timing
   const onDragStart = (idx: number) => {
-    setInput(prev => ({ ...prev, draggingIdx: idx } as any));
+    setInput(prev => ({ ...prev, draggingIdx: idx }));
   };
-  const onDragOver = (idx: number) => {
+  const onDragOver = () => {
     // No-op for now; can use to highlight
   };
   const onDrop = (fromIdx: number, toIdx: number) => {
@@ -176,10 +188,14 @@ const SubtitleManager = ({ onChange }: SubtitleManagerProps) => {
             className="flex items-center gap-2 bg-gray-100 rounded p-2"
             draggable
             onDragStart={() => onDragStart(idx)}
-            onDragOver={e => { e.preventDefault(); onDragOver(idx); }}
-            onDrop={() => onDrop((input as any).draggingIdx, idx)}
+            onDragOver={e => { e.preventDefault(); onDragOver(); }}
+            onDrop={() => {
+              if (input.draggingIdx !== null) {
+                onDrop(input.draggingIdx, idx);
+              }
+            }}
           >
-            <span className="flex-1">[{sub.start}s - {sub.end}s] "{sub.text}"</span>
+            <span className="flex-1">[{sub.start}s - {sub.end}s] &quot;{sub.text}&quot;</span>
             <span style={{fontFamily: sub.font, color: sub.color, fontSize: sub.size, background: '#222', padding: '2px 6px', borderRadius: 4}}>
               {sub.text}
             </span>

@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hook";
+import { useAppDispatch} from "@/lib/redux/hook";
 import { clearCurrentVideo, setCurrentVideo } from "@/lib/redux/slices/videoSlice";
 const VideoUpload = () => {
   const dispatch = useAppDispatch();
@@ -94,7 +94,9 @@ const VideoUpload = () => {
             />
             <div className="flex items-center justify-between mt-2">
               <div className="text-xs text-gray-500">
-                {videoFile?.name} ({(videoFile?.size! / 1024 / 1024).toFixed(2)} MB)
+                {videoFile?.name} ({videoFile
+  ? `${videoFile.name} (${(videoFile.size / 1024 / 1024).toFixed(2)} MB)`
+  : null} MB)
               </div>
               <Button variant="outline" size="sm" onClick={removeVideo} className="ml-2">
                 Remove

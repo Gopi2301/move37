@@ -63,7 +63,7 @@ export default function EditorPage() {
               <h2 className="font-semibold mb-2">Preview</h2>
               <VideoPreview subtitles={subtitles} />
               <div className="flex justify-end mt-4">
-                <Button variant="default" loading="false">Render</Button>
+                <Button variant="default" >Render</Button>
               </div>
             </div>
           </aside>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 
 interface OverlayImage {
@@ -55,16 +56,16 @@ const ImageOverlay = () => {
       const parent = document.getElementById("overlay-parent");
       if (!parent) return;
       const rect = parent.getBoundingClientRect();
-      let newX = ((e.clientX - rect.left) / rect.width) * 100;
-      let newY = ((e.clientY - rect.top) / rect.height) * 100;
+      const newX = ((e.clientX - rect.left) / rect.width) * 100;
+      const newY = ((e.clientY - rect.top) / rect.height) * 100;
       setOverlay((prev) => ({ ...prev, x: Math.max(0, Math.min(100, newX)), y: Math.max(0, Math.min(100, newY)) }));
     }
     if (resizing) {
       const parent = document.getElementById("overlay-parent");
       if (!parent) return;
       const rect = parent.getBoundingClientRect();
-      let newWidth = ((e.clientX - rect.left) / rect.width) * 100 - overlay.x + overlay.width / 2;
-      let newHeight = ((e.clientY - rect.top) / rect.height) * 100 - overlay.y + overlay.height / 2;
+      const newWidth = ((e.clientX - rect.left) / rect.width) * 100 - overlay.x + overlay.width / 2;
+      const newHeight = ((e.clientY - rect.top) / rect.height) * 100 - overlay.y + overlay.height / 2;
       setOverlay((prev) => ({ ...prev, width: Math.max(5, Math.min(100, newWidth)), height: Math.max(5, Math.min(100, newHeight)) }));
     }
   };
@@ -86,10 +87,15 @@ const ImageOverlay = () => {
 
   // Style controls
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type } = e.target;
     setOverlay((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : name === "opacity" ? Number(value) : value,
+      [name]:
+        type === "checkbox"
+          ? (e.target as HTMLInputElement).checked
+          : name === "opacity"
+          ? Number(value)
+          : value,
     }));
   };
 
@@ -135,7 +141,7 @@ const ImageOverlay = () => {
             }}
             onMouseDown={onMouseDown}
           >
-            <img src={overlay.src} alt="overlay" style={{ width: "100%", height: "100%", objectFit: "contain", pointerEvents: "none", userSelect: "none" }} />
+            <Image src={overlay.src} alt="overlay" style={{ width: "100%", height: "100%", objectFit: "contain", pointerEvents: "none", userSelect: "none" }} />
             {/* Resize handle */}
             <div
               style={{

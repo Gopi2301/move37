@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { GripVertical, Volume2, VolumeX, Music } from "lucide-react";
+import Image from 'next/image';
 
 // Mock audio tracks
 const initialTracks = [
@@ -75,7 +76,7 @@ const AudioManager = () => {
             </div>
             {/* Mock waveform */}
             <div className="w-40 h-8 flex items-center justify-center mr-2">
-              <img src="/audio.png" alt="waveform" width={160} height={32} style={{objectFit: 'contain'}} />
+              <Image src="/audio.png" alt="waveform" width={160} height={32} style={{objectFit: 'contain'}} />
             </div>
             {/* Track name */}
             <span className="font-medium mr-2">{track.name}</span>
