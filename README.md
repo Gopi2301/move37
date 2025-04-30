@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Move37 Video Editor
+
+A modern, interactive video editor built with Next.js, React, and Redux. Supports video upload, timeline scene management, draggable overlays, and audio/image integration for creative video projects.
+
+---
+
+## Features
+
+- **Video Upload & Preview:**
+  - Upload your own videos and preview them instantly in the browser.
+- **Timeline with Thumbnails:**
+  - Visual timeline for organizing scenes, now with video thumbnails for quick navigation.
+- **Scene Management:**
+  - Add, remove, and reorder scenes with a simple drag-and-drop interface.
+- **Audio & Image Overlays:**
+  - Add audio tracks and overlay images to your video scenes.
+- **Rendering & Download:**
+  - Render the final video with all overlays and download the exported result.
+- **Responsive UI:**
+  - Clean, modern design with responsive layout for desktop and tablet.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+2. **Run the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+3. **Open your browser:**
+   Visit [http://localhost:3000](http://localhost:3000)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Upload a video** using the upload section.
+- **Manage scenes** in the timeline. Each scene displays a video thumbnail for easy navigation.
+- **Add overlays** like images or audio to enhance your video.
+- **Render and download** the final video with all your edits.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Code Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `/components/preview/VideoPreview.tsx` – Main video preview and render actions
+- `/components/timeline/Timeline.tsx` – Timeline with draggable scenes and thumbnails
+- `/components/audio/AudioManager.tsx` – Manage audio overlays
+- `/components/image-overlay/ImageOverlay.tsx` – Image overlay features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
